@@ -1,0 +1,58 @@
+Aria-1 ISA
+8-bit addresses and registers
+256 8-bit words of RAM
+256 12-bit words of ROM (instructions)
+
+No pipeline: all instructions execute in 1 cycle
+
+16 registers (14 general purpose (a-n), flags (fl) and instruction pointer (ip))
+4-bit codes and names used in assembly:
+0: a
+1: b
+2: c
+3: d
+4: e
+5: f
+6: g
+7: h
+8: i
+9: j
+A: k
+B: l
+C: m
+D: n
+E: fl
+F: ip
+
+Flag register bits:
+0: ZF
+1: SF
+2: OF
+
+Instructions:     ; Equivalent Intel syntax pseudo-x86:
+0: set imm8       ; mov a, imm
+1: lod r1 r2      ; mov r1, [r2]
+2: str r1 r2      ; mov [r1] r2
+3: cpy r1 r2      ; mov r1 r2
+4: jl imm8        ; jl imm (absolute address)
+5: je imm8        ; je imm (absolute address)
+6: addi r imm4    ; add r, signExtend(imm4)
+7: sel r1 r2      ; shr r1, r2 ; and r1, 1
+8: add r1 r2      ; add r1, r2
+9: sub r1 r2      ; sub r1, r2
+A: not r1 r2      ; mov r1, r2 ; not r1
+B: and r1 r2      ; and r1, r2
+C: or r1 r2       ; or r1, r2
+D: xor r1 r2      ; xor r1, r2
+E: shl r1 r2      ; shl r1, r2
+F: shr r1 r2      ; shr r1, r2
+
+Only addi, add and sub affect overflow flag
+All arithmetic instructions set zero and sign flags
+
+All registers can be operands for any instruction, except
+that flags can't be written to directly
+
+jl takes branch if SF ^ OF, otherwise falls through
+je takes branch if ZF, otherwise falls through
+
